@@ -1,82 +1,113 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
+import { SearchBar } from './Search';
+import logo from '../assets/imagens/logo_bgremover.png';
+import aiqfome from '../assets/imagens/aiqfome.svg';
+import instagram from '../assets/imagens/instagram.svg';
 
-const Cardapio = () =>{
 
-    const allCategories = []
-    const AllProducts = []
+const Cardapio = () => {
 
-    const[category, setCategory] =  useState([])
-    const[categoryNames, setCategoryNames] =  useState([])
-    const[categorySizes, setCategorySizes] =  useState([])
-    const[productNames, setProductNames] = useState([])
-    const[productPrices, setProductPrices] = useState([])
 
-    useEffect(()=>{
-        Axios.get(`http://127.0.0.1:3001/api/getCategoryNames`).then((result)=>{
-            setCategoryNames(result.data)
-        })
-        Axios.get(`http://127.0.0.1:3001/api/getCategorySizes`).then((result)=>{
-            setCategorySizes(result.data)
-        })
-        Axios.get(`http://127.0.0.1:3001/api/getProducts`).then((result)=>{
-            setProductNames(result.data)
-        })
-        Axios.get(`http://127.0.0.1:3001/api/getProductPrice`).then((result)=>{
-            setProductPrices(result.data)
+    const [category, setCategory] = useState([])
+
+
+    useEffect(() => {
+        Axios.get(`http://127.0.0.1:3001/api/getCategories`).then((result) => {
+            setCategory(result.data)
         })
     }, [])
 
-                                
-
-    categoryNames.map((categorySingle, index)=>{
-
-        const sizes = []
-
-        categorySizes.map((size, index)=>{
-            if(size.id_option == categorySingle.id){
-                sizes.push(size.name)
-            }
-        })
-        allCategories.push({...categorySingle, sizes: [...sizes]})
-    })
 
 
-    productNames.map((product, index)=>{
-        const prices = []
-        productPrices.map((price, index)=>{
-            if(price.id_produto == product.id){
-                prices.push(price.price)
-            }
-        })
-
-        AllProducts.push({...product, prices: [...prices]})
-    })
-
-    console.log(AllProducts)
 
     return (
         <>
-            {allCategories.map((categorySingle, index)=>{
+            <div className='wrapper'>
 
-                var sizes = ``
-                
-                return (
+                <SearchBar/>
 
-                    <table>
-                        <h2>
-                            { categorySingle.name }
-                        </h2>
+                <div className='cardapio_wrapper'>
+                    <div className='cardapio_container'>
+                        <div className='logo_container'>
+                            <img src={logo} className="img_logo" />
+                        </div>
 
-                        {categorySingle.sizes.map((size)=>{
-                            return (<th>{size}</th>)
+
+                        {category.map((category_single, index) => {
+
+
+                            return (
+
+                                <table>
+                                    <h2>
+                                        {category_single.name}
+                                    </h2>
+
+                                    {category_single.sizes.map((size) => {
+                                        return (<th>{size}</th>)
+                                    })}
+
+
+                                    {category_single.products.map((product) => {
+                                        return (
+                                            <tr>
+                                                <td>
+                                                    {product.name}
+                                                    <p className='td_p_components'>
+                                                        {product.description}
+                                                    </p>
+                                                </td>
+
+                                                {product.prices.map((price) => {
+                                                    return (
+                                                        <td>{price}</td>
+                                                    )
+                                                })}
+                                            </tr>
+                                        )
+                                    })}
+
+
+
+
+                                </table>
+
+
+                            )
                         })}
 
-                    </table>
-                
 
-                )
-            })}
+                    </div>
+                    <div className='infos'>
+                        <div className='left'>
+                            <p className="address">
+                                R. Sábino José Ferreira, 719 - Carmo, Barbacena - MG, 36200-656
+                            </p>
+                            <p className="tel">
+                                3333-3333
+                            </p>
+                        </div>
+                        <div className='right'>
+                            <p className="instagram">
+                                <a target="_blank" href="https://www.instagram.com/pizzariareal.bq/">
+                                    pizzariareal.bq
+                                </a>
+                                <img src={instagram} />
+                            </p>
+                            <p className="aiqfome">
+                                <a target="_blank" href="https://aiqfome.com/MG/barbacena/pizzaria-real">
+                                    Pizzaria Real
+                                </a>
+                                <img src={aiqfome} />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
         </>
     )
 }
