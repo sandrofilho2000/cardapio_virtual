@@ -1,0 +1,21 @@
+{
+  "name": "cardapio-virtual",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandrofilho2000/cardapio_virtual.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandrofilho2000/cardapio_virtual/issues"
+  },
+  "homepage": "https://github.com/sandrofilho2000/cardapio_virtual#readme"
+}

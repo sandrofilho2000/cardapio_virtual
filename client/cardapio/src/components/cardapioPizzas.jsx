@@ -4,13 +4,17 @@ import { SearchBar } from './Search';
 import logo from '../assets/imagens/logo_bgremover.png';
 import aiqfome from '../assets/imagens/aiqfome.svg';
 import instagram from '../assets/imagens/instagram.svg';
-
+import openBairrosIcon from '../assets/imagens/deliveryIcon.svg';
 
 const Cardapio = () => {
 
 
     const [category, setCategory] = useState([])
 
+    const handleBairros = (e) =>{
+        var bairrosOverlay = document.querySelector(".bairros_overlay")
+        bairrosOverlay.classList.contains("active") ? bairrosOverlay.classList.remove("active") : bairrosOverlay.classList.add("active")
+    }
 
     useEffect(() => {
         Axios.get(`http://127.0.0.1:3001/api/getCategories`).then((result) => {
@@ -20,12 +24,14 @@ const Cardapio = () => {
 
 
 
-
     return (
         <>
             <div className='wrapper'>
 
                 <SearchBar/>
+                <div onClick={handleBairros} className='openBairros'>
+                    <img src={openBairrosIcon} />
+                </div>
 
                 <div className='cardapio_wrapper'>
                     <div className='cardapio_container'>

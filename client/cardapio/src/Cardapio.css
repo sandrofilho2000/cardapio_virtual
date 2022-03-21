@@ -91,7 +91,7 @@ body{
   margin-top: -10px;
 }
 
-table{
+.wrapper table{
   width: 95%;
   margin: 0 auto;
   position: relative;
@@ -101,7 +101,7 @@ table{
   padding-top: 60px;
 }
 
-table h2{
+.wrapper table h2{
   position: absolute;
   text-align: center;
   top: -35px;
@@ -112,19 +112,19 @@ table h2{
 
 
 
-table th{
+.wrapper table th{
   padding: 0 10px;
   font-weight: normal;
   font-size: 10px;
 }
 
-table tr{
+.wrapper table tr{
   position: relative;
 }
 
 
 
-table td{
+.wrapper table td{
   padding: 10px 10px;
   font-size: 11px;
   white-space: nowrap;
@@ -132,11 +132,11 @@ table td{
   font-weight: bold;
 }
 
-table td:nth-of-type(1){
+.wrapper table td:nth-of-type(1){
   white-space: initial;
 }
 
-table td:first-of-type{
+.wrapper table td:first-of-type{
   padding: 10px 0px;
   text-align: left;
   font-size: 13px;
@@ -206,16 +206,16 @@ p.td_p_components{
     max-width: 600px;
   }
 
-  table th {
+  .wrapper table th {
     font-size: 12px;
   }
 
 
-  table td {
+  .wrapper table td {
     font-size: 13px;
   }
 
-  table td:first-of-type {
+  .wrapper table td:first-of-type {
     font-size: 15px;
   }
 
