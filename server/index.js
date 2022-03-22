@@ -3,7 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const app = express();
 const mongoose = require("mongoose")
-
+const port = process.env.PORT || 8080
 const Categories = require('./Categories.js')
 const Products = require('./Products.js')
 
@@ -27,10 +27,10 @@ app.use(cors(corsOptions))
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, 'client/cardapio/build')));
 // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/cardapio/build', 'index.html'));
   });
 }
 
@@ -40,7 +40,7 @@ app.use(cors())
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-mongoose.connect("mongodb+srv://sandro_filho98:n1N9yL9EXmZPzyh8@cluster0.0lrhq.mongodb.net/cardapio_virtual?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://sandro_filho98:n1N9yL9EXmZPzyh8@cluster0.0lrhq.mongodb.net/cardapio_virtual?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
     console.log("Connected to db successfully!")
 })
 
@@ -72,8 +72,8 @@ app.post('/api/insertProducts/', (req, res)=>{
 
 
 
-app.listen(3001, () =>{
-    console.log("running on port ", 3001)
+app.listen(port, () =>{
+    console.log("running on port ", port)
 })
 
 

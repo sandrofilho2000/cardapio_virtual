@@ -14,7 +14,7 @@ export const SearchBar = () =>{
         var replace = `${valor}\\w`;
         var re = new RegExp(replace,"gi");
     
-        var td_array = document.querySelectorAll("table td:first-of-type")
+        var td_array = document.querySelectorAll(".wrapper table td:first-of-type")
         td_array.forEach((td)=>{
             var product_nome = td.innerText 
             product_nome = product_nome.trim().replaceAll(' ', 'wyx')
@@ -28,7 +28,7 @@ export const SearchBar = () =>{
             }
         }) 
 
-        var table_array = document.querySelectorAll("table")
+        var table_array = document.querySelectorAll(".wrapper table")
         table_array.forEach((table)=>{
             var tr_array = table.querySelectorAll('tr[hide=false]')
             tr_array.length == 0 ? table.style.display = 'none' : table.style.display = 'table'

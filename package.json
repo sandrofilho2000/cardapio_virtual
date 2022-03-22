@@ -8,8 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku-postbuild": "npm install-client && npm run build",
+    "build": "cd client && cd cardapio && npm run build",
+    "install-client": "cd client && cd cardapio && npm install"
   },
   "repository": {
     "type": "git",
